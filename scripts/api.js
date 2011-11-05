@@ -17,3 +17,13 @@ Foursquare.prototype.doAuthRedirect = function(authUrl, apiKey) {
     '&state=' + encodeURIComponent($.bbq.getState('req') || 'users/self');
   window.location.href = url;
 };
+
+/**
+ * Helper utility duplicating goog.bind from Closure, useful for creating object-oriented callbacks.
+ * something(bind(this.foo, this)) is equiavlent to var self = obj; something(function() { self.foo });
+ */
+function bind(f, obj) {
+    return function() {
+	f.apply(obj, arguments);
+    }
+}

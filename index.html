@@ -194,7 +194,18 @@
 
   function App(apiKey, authUrl, apiUrl) {
     this.foursquare = new Foursquare(apiKey, authUrl, apiUrl);
-    this.run = function() {};
+    this.run = function() {
+      //this.foursquare.venueName(bind(this.onVenueName, this));
+    };
+  }
+
+  App.prototype.onVenueName = function(_venue) {
+    /*this.friends = {};
+    for (var f in _friends) {
+    this.friends[_friends[f]['id']] = _friends[f];
+    }
+    this.draw();*/
+    console.log(_venue);
   }
 
   $(function() {
