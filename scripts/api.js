@@ -70,6 +70,11 @@ Foursquare.prototype.deactivateCampaign = function(campaignId, callback) {
                      function(response) { callback(response['response']['campaign']) });
 };
 
+Foursquare.prototype.stats = function(vid, callback) {
+    this.makeRequest('venues/' + vid + '/stats',
+                     function(response) { callback(response['response']['stats']) });
+};
+
 
 Foursquare.prototype.postRequest = function(formId, data) {
     data['oauth_token'] = this.token;
