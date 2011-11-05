@@ -18,6 +18,16 @@ Foursquare.prototype.doAuthRedirect = function(authUrl, apiKey) {
   window.location.href = url;
 };
 
+Foursquare.prototype.makeRequest = function(query, callback) {
+    var query = query + ((query.indexOf('?') > -1) ? '&' : '?') + 'oauth_token=' + this.token + '&callback=?';
+    $.getJSON(this.apiUrl + 'v2/' + query, {}, callback);
+};
+
+Foursquare.prototype.searchVenues = function(lat, lng, callback) {
+    this.makeRequest('venues/search?ll=' + lat + ',' + lng,
+                     function(response) { callback(response['response']['groups']) });
+};
+
 /**
  * Helper utility duplicating goog.bind from Closure, useful for creating object-oriented callbacks.
  * something(bind(this.foo, this)) is equiavlent to var self = obj; something(function() { self.foo });
