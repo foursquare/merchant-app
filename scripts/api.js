@@ -6,7 +6,7 @@ function Foursquare(apiKey, authUrl, apiUrl) {
     $.bbq.pushState({}, 2)
   } else if ($.bbq.getState('error')) {
   } else {
-    this.doAuthRedirect(authUrl, apiKey, redirect);
+    this.doAuthRedirect(authUrl, apiKey);
   }
 }
 
