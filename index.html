@@ -14,8 +14,23 @@
   <link rel="apple-touch-icon-precomposed" href="img/button.png" />
 
   <!-- Scripts -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" id="jquery"></script>
   <script src="http://yui.yahooapis.com/3.4.0/build/yui/yui-min.js"></script>    
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js" type="text/javascript"></script> 
+  <script src="scripts/jquery.ba-bbq.js" type="text/javascript"></script>
+  <script src="scripts/api.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  //<![CDATA[
+
+  function App(apiKey, authUrl, apiUrl, redirect) = {
+    this.foursquare = new Foursquare(api, authUrl, apiUrl);
+  }
+  
+  //]]>
+  $(function() {
+    this.app = new App('VMIFWZFUBHZDDWDRLC0SLXLUIUF1TJDMZCPYRQBRWG3S1C0E', 'http://foursquare.com/', 'https://api.foursquare.com/');
+    this.app.run();
+  })
+  </script>
 
   <!-- Styles -->
   <link rel="stylesheet" type="text/css" href="style.css">
