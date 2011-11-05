@@ -142,14 +142,14 @@
   </div><!-- end #scrollview-content -->
   
   <div id="hereNow">
-    <p><strong>7 people</strong> are checked in here right now</p>
+    <!--p><strong>7 people</strong> are checked in here right now</p>
     <img src="img/pic/dens.jpg" alt="dens" width="32" height="32" />
     <img src="img/pic/sam.jpg" alt="" width="32" height="32" />
     <img src="img/pic/akshay.jpg" alt="akshay" width="32" height="32" />
     <img src="img/pic/albert.jpg" alt="albert" width="32" height="32" />
     <img src="img/pic/dolapo.jpg" alt="dolapo" width="32" height="32" />
     <img src="img/pic/vipul.jpg" alt="vipul" width="32" height="32" />
-    <img src="img/pic/nick.jpg" alt="nick" width="32" height="32" />
+    <img src="img/pic/nick.jpg" alt="nick" width="32" height="32" /-->
   </div><!-- end #hereNow -->
   
   <div id="footer">
@@ -194,6 +194,16 @@
 
   App.prototype.onVenue = function(_venue) {
     $('#header a').text(_venue.name);
+    var vid = _venue.id;
+    this.foursquare.herenow(vid, bind(this.onHereNow, this));
+  }
+
+  App.prototype.onHereNow = function(_hereNow) {
+    var hn = $('#hereNow');
+    hn.append('<p><strong>' + _hereNow.count +  ' people</strong> are checked in here right now</p>');
+    for (var u in _hereNow.items) {
+      hn.append('<img src="' + _hereNow.items[u].user.photo + '" alt="' + _hereNow.items[u].user.firstName + '" width="32" height="32" />');
+    }
   }
 
   App.prototype.onListSpecials = function(specials) {

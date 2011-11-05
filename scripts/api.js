@@ -28,6 +28,11 @@ Foursquare.prototype.venue = function(callback) {
                      function(response) { callback(response['response']['venues'][0]) });
 };
 
+Foursquare.prototype.herenow = function(id, callback) {
+    this.makeRequest('venues/' + id + '/herenow',
+                     function(response) { callback(response['response']['hereNow']) });
+};
+
 /**
  * Helper utility duplicating goog.bind from Closure, useful for creating object-oriented callbacks.
  * something(bind(this.foo, this)) is equiavlent to var self = obj; something(function() { self.foo });
