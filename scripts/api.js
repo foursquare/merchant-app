@@ -59,6 +59,27 @@ Foursquare.prototype.listCampaigns = function(callback) {
                      function(response) { callback(response['response']['campaigns']) });
 };
 
+Foursquare.prototype.activateSpecial = function(specialId, venueId, callback) {
+    this.postRequest('activateSpecialForm', { specialId: specialId, venueId: venueId },
+                     function(response) { callback(response['response']['campaign'])
+   });
+};
+
+Foursquare.prototype.deactivateCampaign = function(campaignId, callback) {
+    this.postRequest('deactivateSpecialForm', { action: this.apiUrl + '/v2/campaigns/' + campaignId + '/end' },
+                     function(response) { callback(response['response']['campaign']) });
+};
 
 
-
+Foursquare.prototype.postRequest = function(formId, data) {
+    data['oauth_token'] = this.token;
+    var form = $('#'+formId);
+    for (key in data) {
+	if (key == 'action') {
+	    form.attr('action', data[key]);
+	} else {
+	    $('#'+formId+' #'+key).val(data[key]);
+	}
+    }
+    form.submit();
+};

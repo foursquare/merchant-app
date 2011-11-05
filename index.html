@@ -194,8 +194,8 @@
 
   App.prototype.onVenue = function(_venue) {
     $('#header a').text(_venue.name);
-    var vid = _venue.id;
-    this.foursquare.herenow(vid, bind(this.onHereNow, this));
+    this.vid = _venue.id;
+    this.foursquare.herenow(this.vid, bind(this.onHereNow, this));
   }
 
   App.prototype.onHereNow = function(_hereNow) {
@@ -208,6 +208,8 @@
 
   App.prototype.onListSpecials = function(specials) {
     var img = '<img src="img/special.png" alt="" width="32" height="32" />'
+    var onButton = function(sid, vid) { return '<a href="#" class="button" onclick="activateSpecial(\''+sid+'\', \''+vid+'\')">ENABLE</a>' }
+    var offButton = function(cid) { return '<div href="#" class="button" onclick="deactivateSpecial(\''+cid+'\')">DISABLE</div>' }
     var self = this;
 
     self.foursquare.listCampaigns(function(campaigns) {
@@ -222,23 +224,54 @@
         self.foursquare.getSpecial(special.id, function(special) {
           var c = specialToCampaign[special.id];
           if (c) {
-            console.log("appending active");
-            $('#activeSpecials').append('<div class="box">'+ img + special.type + '</div>');
+            $('#activeSpecials').append('<div class="box">'+ img + special.type + offButton(c.id) + '</div>');
           } else {
-            console.log("appending inactive");
-            $('#inactiveSpecials').append('<div class="box dark">' + img + special.type + '</div>');
+            $('#inactiveSpecials').append('<div class="box">' + img + special.type + onButton(special.id, self.vid) + '</div>');
           }
         });
       }
     })
   }
 
+  function redraw() {
+    $('#activeSpecials').empty();
+    $('#inactiveSpecials').empty();
+    app.foursquare.listSpecials(bind(app.onListSpecials, app));
+  }
+
+  function activateSpecial(specialId, venueId) {
+    app.foursquare.activateSpecial(specialId, venueId, function() {
+      redraw();
+    })
+  }
+
+  function deactivateSpecial(campaignId) {
+    app.foursquare.deactivateCampaign(campaignId, function() {
+      redraw();
+    })
+  }
+
+  var app = null;
+
   $(function() {
-    this.app = new App('VMIFWZFUBHZDDWDRLC0SLXLUIUF1TJDMZCPYRQBRWG3S1C0E', 'http://foursquare.com/', 'https://api.foursquare.com/');
-    this.app.run();
+    app = new App('VMIFWZFUBHZDDWDRLC0SLXLUIUF1TJDMZCPYRQBRWG3S1C0E', 'http://foursquare.com/', 'https://api.foursquare.com/');
+    app.run();
   })
 
 </script>
+
+<form style="display:none" id="activateSpecialForm" action="https://api.foursquare.com/v2/campaigns/add" method="POST" target="response">
+  <input type="hidden" name="oauth_token" id="oauth_token"/>
+  <input type="hidden" name="specialId" id="specialId"/>
+  <input type="hidden" name="venueId" id="venueId"/>
+  <input type="hidden" name="startAt" id="startAt" value="0"/>
+</form>
+
+<form style="display:none" id="deactivateSpecialForm" action="https://api.foursquare.com/v2/campaigns/end" method="POST" target="response">
+  <input type="hidden" name="oauth_token" id="oauth_token"/>
+</form>
+
+<iframe style="display:none" name="response" onload="redraw()"></iframe>
 
 </body>
 </html>
