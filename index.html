@@ -46,19 +46,11 @@
       </div>
   
       <h2>Active Specials</h2>
-      <div class="box">
-        <img src="img/special-checkin.png" alt="" width="33" height="32" />Check-in Special 7/12/2010
+      <div id="activeSpecials">
       </div>
-      
-      <h2 class="dark">Inactive Specials</h2>
-      <div class="box dark">
-        <img src="img/special.png" alt="" width="32" height="32" />Untitled Special
-      </div>
-      <div class="box dark">
-        <img src="img/special-checkin.png" alt="" width="33" height="32" />New Check-in Special 10/10/2011
-      </div>
-      <div class="box dark">
-        <img src="img/special-mayor.png" alt="" width="32" height="32" />Free round of drinks for the Mayor
+
+      <h2>Inactive Specials</h2>
+      <div id="inactiveSpecials">
       </div>
       
       <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
@@ -196,11 +188,39 @@
     this.foursquare = new Foursquare(apiKey, authUrl, apiUrl);
     this.run = function() {
       this.foursquare.venue(bind(this.onVenue, this));
+      this.foursquare.listSpecials(bind(this.onListSpecials, this));
     };
   }
 
   App.prototype.onVenue = function(_venue) {
     $('#header a').text(_venue.name);
+  }
+
+  App.prototype.onListSpecials = function(specials) {
+    var img = '<img src="img/special.png" alt="" width="32" height="32" />'
+    var self = this;
+
+    self.foursquare.listCampaigns(function(campaigns) {
+      var specialToCampaign = {};
+      for (var i = 0; i < campaigns.count; i++) {
+        var campaign = campaigns.items[i];
+        specialToCampaign[campaign.specialId] = campaign;
+      }
+
+      for (var i = 0; i < specials.count; i++) {
+        var special = specials.items[i];
+        self.foursquare.getSpecial(special.id, function(special) {
+          var c = specialToCampaign[special.id];
+          if (c) {
+            console.log("appending active");
+            $('#activeSpecials').append('<div class="box">'+ img + special.type + '</div>');
+          } else {
+            console.log("appending inactive");
+            $('#inactiveSpecials').append('<div class="box dark">' + img + special.type + '</div>');
+          }
+        });
+      }
+    })
   }
 
   $(function() {

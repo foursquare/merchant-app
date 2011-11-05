@@ -37,3 +37,23 @@ function bind(f, obj) {
 	f.apply(obj, arguments);
     }
 }
+
+Foursquare.prototype.listSpecials = function(callback) {
+    this.makeRequest('specials/list',
+                     function(response) { callback(response['response']['specials']) });
+};
+
+
+Foursquare.prototype.getSpecial = function(specialId, callback) {
+    this.makeRequest('specials/' + specialId + '/configuration',
+                     function(response) { callback(response['response']['special']) });
+};
+
+Foursquare.prototype.listCampaigns = function(callback) {
+    this.makeRequest('campaigns/list?status=active',
+                     function(response) { callback(response['response']['campaigns']) });
+};
+
+
+
+
