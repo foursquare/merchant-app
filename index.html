@@ -207,7 +207,7 @@
   }
 
   App.prototype.onListSpecials = function(specials) {
-    var img = '<img src="img/special.png" alt="" width="32" height="32" />'
+    var img = function(type) { return '<img src="http://foursquare.com/img/specials/'+type+'.png" alt="" width="32" height="32" />' }
     var onButton = function(sid, vid) { return '<a href="#" class="button" onclick="activateSpecial(\''+sid+'\', \''+vid+'\')">ENABLE</a>' }
     var offButton = function(cid) { return '<div href="#" class="button" onclick="deactivateSpecial(\''+cid+'\')">DISABLE</div>' }
     var self = this;
@@ -223,10 +223,13 @@
         var special = specials.items[i];
         self.foursquare.getSpecial(special.id, function(special) {
           var c = specialToCampaign[special.id];
+          var text = special.text;
+          if (text.length > 25) text = text.substring(0, 25) + "...";
+          var content = img(special.type) + text
           if (c) {
-            $('#activeSpecials').append('<div class="box">'+ img + special.type + offButton(c.id) + '</div>');
+            $('#activeSpecials').append('<div class="box">' + content + offButton(c.id) + '</div>');
           } else {
-            $('#inactiveSpecials').append('<div class="box">' + img + special.type + onButton(special.id, self.vid) + '</div>');
+            $('#inactiveSpecials').append('<div class="box">' + content + onButton(special.id, self.vid) + '</div>');
           }
         });
       }
