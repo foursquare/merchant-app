@@ -1,0 +1,196 @@
+<!DOCTYPE html>	
+<html>
+<head>
+
+  <title>Dashboard</title>
+
+  <!-- Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=320; initial-scale=1.0; user-scalable=0;" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  <!-- Icon -->
+  <link rel="apple-touch-icon-precomposed" href="img/button.png" />
+
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" id="jquery"></script>
+  <script src="http://yui.yahooapis.com/3.4.0/build/yui/yui-min.js"></script>    
+
+  <!-- Styles -->
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+
+  <div id="header">
+    <div class="button">Create Special</div>
+    <a href=""><img src="img/icon.png" alt="" width="32" height="32" />The Scratcher</a>
+  </div>
+
+  <div id="scrollview-content">
+  
+    <div id="viewSpecials" class="view">
+    
+      <h2 style="display: none;">Create Flash Special</h2>
+      <div class="box graph createSpecial" style="display: none;">
+        <p>When a customer is one of the first</p>
+        <p><input type="text" value="10" class="inputBig" /></p>
+        <p>people to check in between</p>
+        <p><input type="text" value ="6" class="inputBig" /> and <input type="text" value ="10" class="inputBig" /> &nbsp;pm</p>
+        <p>they will unlock and receive</p>
+        <p><textarea class="inputBig">a free appetizer…</textarea></p>
+        <p><div class="button">Get me customers now!</div></p>
+      </div>
+  
+      <h2>Active Specials</h2>
+      <div class="box">
+        <img src="img/special-checkin.png" alt="" width="33" height="32" />Check-in Special 7/12/2010
+      </div>
+      
+      <h2 class="dark">Inactive Specials</h2>
+      <div class="box dark">
+        <img src="img/special.png" alt="" width="32" height="32" />Untitled Special
+      </div>
+      <div class="box dark">
+        <img src="img/special-checkin.png" alt="" width="33" height="32" />New Check-in Special 10/10/2011
+      </div>
+      <div class="box dark">
+        <img src="img/special-mayor.png" alt="" width="32" height="32" />Free round of drinks for the Mayor
+      </div>
+      
+      <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+      <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+      <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+      <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+    
+    </div><!-- end #viewSpecials -->
+    
+    <div id="viewStats" class="view">
+    
+      <h2>Stats</h2>
+      
+      <div class="statsRow">
+        <div class="statsBlock">1,378</div>
+        <div class="statsBlock">6,158</div>
+        <div class="statsBlock">7.12</div>
+      </div>
+      
+      <div class="statsRow">
+        <div class="statsTitle">People</div>
+        <div class="statsTitle">Checkins</div>
+        <div class="statsTitle">Avg. P/Day</div>
+      </div>
+      
+      <div class="statsRow">
+        <div class="statsBlock">17</div>
+        <div class="statsBlock">44</div>
+        <div class="statsBlock">8</div>
+      </div>
+      
+      <div class="statsRow">
+        <div class="statsTitle">Photos</div>
+        <div class="statsTitle">Tips</div>
+        <div class="statsTitle">Lists</div>
+      </div>
+      
+      <br />
+      
+      <h2>Check-ins vs New Visitors</h2>
+      <div class="box graph"><img src="img/graph1.png" alt="" width="288" /></div>
+      
+      <h2>Time Breakdown</h2>
+      <div class="box graph"><img src="img/graph2.png" alt="" width="288" /></div>
+      
+      <h2>Gender</h2>
+      <div class="box graph"><img src="img/graph3.png" alt="" width="288" /></div>
+      
+      <h2>Age</h2>
+      <div class="box graph"><img src="img/graph4.png" alt="" width="288" /></div>
+      
+    </div><!-- end #viewStats -->
+    
+    <div id="viewDetails" class="view">
+      <h2>Your Venue Details</h2>
+      
+      <h2><span class="mayorFloat">Last 60 Days</span>Mayor</h2>
+      <div class="box mayor"><span class="mayorFloat">27 check-ins</span><img src="img/pic/dens.jpg" alt="" width="32" height="32" /> Dennis C.</div>
+      
+      <h2>Latest Photos</h2>
+      <div class="photos">
+        <img src="img/photo1.jpg" alt="" width="90" height="90" />
+        <img src="img/photo2.jpg" alt="" width="90" height="90" />
+        <img src="img/photo3.jpg" alt="" width="90" height="90" />
+      </div>
+      
+      <br />
+      
+      <h2>Categories and Tags</h2>
+      <p class="small"><strong>Bar</strong></p>
+      <p class="small">east village, tech hangout, bar, guinness</p>
+      
+      <br />
+      
+      <h2>Twitter Mentions</h2>
+      <p class="small"><strong>@dens</strong> - foursquare team outing number #848 (@ The Scratcher) http://4sq.com/2rdBhD</p>
+      <p class="small"><strong>@sambrown</strong> - New new, old, new old, new foursquare hangout (@ The Scratcher) http://4sq.com/2rdBhD</p>
+      
+    </div><!-- end #viewDetails -->
+    
+    <div id="viewProfile" class="view">
+      <h2>Profile Page</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br /><br /></p>
+      <p>Lovingly made in New York City<br /><br /></p>
+      <p>Logout<br /><br /></p>
+      <p>ツ</p>
+    </div><!-- end #viewProfile -->
+  
+  </div><!-- end #scrollview-content -->
+  
+  <div id="hereNow">
+    <p><strong>7 people</strong> are checked in here right now</p>
+    <img src="img/pic/dens.jpg" alt="dens" width="32" height="32" />
+    <img src="img/pic/sam.jpg" alt="" width="32" height="32" />
+    <img src="img/pic/akshay.jpg" alt="akshay" width="32" height="32" />
+    <img src="img/pic/albert.jpg" alt="albert" width="32" height="32" />
+    <img src="img/pic/dolapo.jpg" alt="dolapo" width="32" height="32" />
+    <img src="img/pic/vipul.jpg" alt="vipul" width="32" height="32" />
+    <img src="img/pic/nick.jpg" alt="nick" width="32" height="32" />
+  </div><!-- end #hereNow -->
+  
+  <div id="footer">
+    <a href="#viewSpecials" class="selected">Specials</a><a href="#viewStats">Stats</a><a href="#viewDetails">Details</a><a href="#viewProfile">Profile</a>
+  </div>
+  
+<script type="text/javascript" charset="utf-8">
+
+  // Switch views
+  $("#footer a").click(function(e) {
+    $("#scrollview-content .view").hide();
+    $(this.hash).show();
+    $("#footer a").removeClass("selected");
+    $(this).addClass("selected");
+  });
+  $("#scrollview-content .view:not(#viewSpecials)").hide();
+
+  // YUI Scroll
+  YUI().use('scrollview-base', function(Y) {
+
+    var scrollView = new Y.ScrollView({
+        id:"scrollview",
+        srcNode: '#scrollview-content',
+        height: 301,
+        flick: {
+            minDistance:10,
+            minVelocity:0.3,
+            axis: "y"
+        }
+    });
+
+    scrollView.render();
+  })
+
+</script>
+
+</body>
+</html>
