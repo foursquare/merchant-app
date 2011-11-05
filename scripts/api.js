@@ -23,9 +23,9 @@ Foursquare.prototype.makeRequest = function(query, callback) {
     $.getJSON(this.apiUrl + 'v2/' + query, {}, callback);
 };
 
-Foursquare.prototype.searchVenues = function(lat, lng, callback) {
-    this.makeRequest('venues/search?ll=' + lat + ',' + lng,
-                     function(response) { callback(response['response']['groups']) });
+Foursquare.prototype.venue = function(callback) {
+    this.makeRequest('venues/managed',
+                     function(response) { callback(response['response']['venues'][0]) });
 };
 
 /**

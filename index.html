@@ -27,7 +27,7 @@
 
   <div id="header">
     <div class="button">Create Special</div>
-    <a href=""><img src="img/icon.png" alt="" width="32" height="32" />The Scratcher</a>
+    <a href=""><img src="img/icon.png" alt="" width="32" height="32" /></a>
   </div>
 
   <div id="scrollview-content">
@@ -195,17 +195,12 @@
   function App(apiKey, authUrl, apiUrl) {
     this.foursquare = new Foursquare(apiKey, authUrl, apiUrl);
     this.run = function() {
-      //this.foursquare.venueName(bind(this.onVenueName, this));
+      this.foursquare.venue(bind(this.onVenue, this));
     };
   }
 
-  App.prototype.onVenueName = function(_venue) {
-    /*this.friends = {};
-    for (var f in _friends) {
-    this.friends[_friends[f]['id']] = _friends[f];
-    }
-    this.draw();*/
-    console.log(_venue);
+  App.prototype.onVenue = function(_venue) {
+    $('#header a').text(_venue.name);
   }
 
   $(function() {
