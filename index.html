@@ -27,7 +27,7 @@
 
   <div id="header">
     <div class="button">Create Special</div>
-    <a href=""><img src="img/icon.png" alt="" width="32" height="32" /></a>
+    <a href="">Loading venue...</a>
   </div>
 
   <div id="scrollview-content">
@@ -193,7 +193,8 @@
   }
 
   App.prototype.onVenue = function(_venue) {
-    $('#header a').text(_venue.name);
+    var cat = _venue.categories[0].icon;
+    $('#header a').html('<img src="'+cat+'"/>' + _venue.name);
     this.vid = _venue.id;
     this.foursquare.herenow(this.vid, bind(this.onHereNow, this));
   }
@@ -224,7 +225,7 @@
         self.foursquare.getSpecial(special.id, function(special) {
           var c = specialToCampaign[special.id];
           var text = special.text;
-          if (text.length > 25) text = text.substring(0, 25) + "...";
+          if (text.length > 15) text = text.substring(0, 15) + "...";
           var content = img(special.type) + text
           if (c) {
             $('#activeSpecials').append('<div class="box">' + content + offButton(c.id) + '</div>');
