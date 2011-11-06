@@ -113,10 +113,7 @@
       </div>
       
       <h2>Latest Photos</h2>
-      <div class="photos">
-        <img src="img/photo1.jpg" alt="" width="90" height="90" />
-        <img src="img/photo2.jpg" alt="" width="90" height="90" />
-        <img src="img/photo3.jpg" alt="" width="90" height="90" />
+      <div class="photos" id="photos">
       </div>
       
       <br />
@@ -211,6 +208,15 @@
     var mayor = _venue.mayor.user;
     $('#mayorCount').html(_venue.mayor.count + ' check-ins');
     $('#mayor').html('<img src="'+ mayor.photo+'" height="32" width="32"/>' + mayor.firstName + ' ' + mayor.lastName);
+    var photos = [];
+    for (i = 0; i < _venue.photos.groups.length; i++) {
+      photos = photos.concat(_venue.photos.groups[i].items);
+    }
+    var div = $('#photos');
+    for (i = 0; i < 3 && i < photos.length; i++) {
+      var photo = photos[i];
+      div.append('<img src="'+photo.sizes.items[2].url+'"/>');
+    }
     this.vid = _venue.id;
     this.foursquare.herenow(this.vid, bind(this.onHereNow, this));
   }
