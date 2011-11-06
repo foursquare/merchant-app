@@ -156,7 +156,15 @@
     $("#footer a").removeClass("selected");
     $(this).addClass("selected");
   });
-  $("#scrollview-content .view:not(#viewSpecials)").hide();
+  
+  var selectedTab = '';
+  if ($.deparam['uid']) {
+    selectedTab = '#viewHere';
+  } else {
+    selectedTab = '#viewSpecials';
+  }
+
+  $("#scrollview-content .view:not(" + selectedTab + ")").hide();
 
   // YUI Scroll
   YUI().use('scrollview-base', function(Y) {
