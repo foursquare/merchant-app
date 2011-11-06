@@ -45,12 +45,7 @@
         <p><div class="button">Get me customers now!</div></p>
       </div>
   
-      <h2>Active Specials</h2>
-      <div id="activeSpecials">
-      </div>
-
-      <h2>Inactive Specials</h2>
-      <div id="inactiveSpecials">
+      <div id="specials">
       </div>
       
       <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
@@ -221,7 +216,7 @@
       photos = photos.concat(_venue.photos.groups[i].items);
     }
     var div = $('#photos');
-    for (i = 0; i < 3 && i < photos.length; i++) {
+    for (i = 0; i < 4 && i < photos.length; i++) {
       var photo = photos[i];
       div.append('<img src="'+photo.sizes.items[2].url+'"/>');
     }
@@ -265,13 +260,14 @@
         var special = specials.items[i];
         self.foursquare.getSpecial(special.id, function(special) {
           var c = specialToCampaign[special.id];
-          var text = special.text;
-          if (text.length > 15) text = text.substring(0, 15) + "...";
-          var content = img(special.type) + text
+          var title = '<div class="specialTitle">' + img(special.type) + '<b>'+special.type+' special</b></div>';
+          var content = '<div class="content">' + special.text;
+          var endContent = '<div style="clear:both"></div></div>';
+          var div = $('#specials');
           if (c) {
-            $('#activeSpecials').append('<div class="box">' + content + offButton(c.id) + '</div>');
+            div.append('<div class="box enabled">' + title + content + offButton(c.id) + endContent + '</div>');
           } else {
-            $('#inactiveSpecials').append('<div class="box">' + content + onButton(special.id, self.vid) + '</div>');
+            div.append('<div class="box disabled">' + title + content + onButton(special.id, self.vid) + endContent + '</div>');
           }
         });
       }
