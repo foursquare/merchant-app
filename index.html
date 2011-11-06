@@ -160,12 +160,11 @@
   });
   
   var selectedTab = '';
-  if ($.deparam['uid']) {
+  if ($.deparam.querystring()['uid'] != null) {
     selectedTab = '#viewHere';
   } else {
     selectedTab = '#viewSpecials';
   }
-
   $("#scrollview-content .view:not(" + selectedTab + ")").hide();
 
   // YUI Scroll
