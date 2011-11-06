@@ -119,8 +119,8 @@
       <br />
       
       <h2>Categories and Tags</h2>
-      <p class="small"><strong>Bar</strong></p>
-      <p class="small">east village, tech hangout, bar, guinness</p>
+      <p class="small" id="categories"></p>
+      <p class="small" id="tags"><p>
       
       <br />
       
@@ -203,11 +203,19 @@
   }
 
   App.prototype.onVenue = function(_venue) {
+    this.vid = _venue.id;
+    this.foursquare.herenow(this.vid, bind(this.onHereNow, this));
+
+    // Category icon & title
     var cat = _venue.categories[0].icon;
     $('#header a').html('<img src="'+cat+'"/>' + _venue.name);
+
+    // Mayor
     var mayor = _venue.mayor.user;
     $('#mayorCount').html(_venue.mayor.count + ' check-ins');
     $('#mayor').html('<img src="'+ mayor.photo+'" height="32" width="32"/>' + mayor.firstName + ' ' + mayor.lastName);
+
+    // Photos
     var photos = [];
     for (i = 0; i < _venue.photos.groups.length; i++) {
       photos = photos.concat(_venue.photos.groups[i].items);
@@ -217,8 +225,11 @@
       var photo = photos[i];
       div.append('<img src="'+photo.sizes.items[2].url+'"/>');
     }
-    this.vid = _venue.id;
-    this.foursquare.herenow(this.vid, bind(this.onHereNow, this));
+
+    // Categories & tags
+    var cats = _venue.categories.map(function(c) { return c.name }).join(',');
+    $('#categories').html('<strong>'+cats+'</strong>');
+    $('#tags').html(_venue.tags.join(', '));
   }
 
   App.prototype.onHereNow = function(_hereNow) {
