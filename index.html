@@ -274,8 +274,7 @@
   }
 
   function redraw() {
-    $('#activeSpecials').empty();
-    $('#inactiveSpecials').empty();
+    $('#specials').empty();
     app.foursquare.listSpecials(bind(app.onListSpecials, app));
   }
 
