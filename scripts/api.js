@@ -23,9 +23,14 @@ Foursquare.prototype.makeRequest = function(query, callback) {
     $.getJSON(this.apiUrl + 'v2/' + query, {}, callback);
 };
 
-Foursquare.prototype.venue = function(callback) {
+Foursquare.prototype.venuesManaged = function(callback) {
     this.makeRequest('venues/managed',
                      function(response) { callback(response['response']['venues'][0]) });
+};
+
+Foursquare.prototype.venue = function(id, callback) {
+    this.makeRequest('venues/' + id,
+                     function(response) { callback(response['response']['venue']) });
 };
 
 Foursquare.prototype.herenow = function(id, callback) {

@@ -108,7 +108,9 @@
       <h2>Your Venue Details</h2>
       
       <h2><span class="mayorFloat">Last 60 Days</span>Mayor</h2>
-      <div class="box mayor"><span class="mayorFloat">27 check-ins</span><img src="img/pic/dens.jpg" alt="" width="32" height="32" /> Dennis C.</div>
+      <div class="box mayor"><span class="mayorFloat" id="mayorCount"></span>
+	<span id="mayor"></span>
+      </div>
       
       <h2>Latest Photos</h2>
       <div class="photos">
@@ -170,7 +172,7 @@
     var scrollView = new Y.ScrollView({
         id:"scrollview",
         srcNode: '#scrollview-content',
-        height: 301,
+        height: 367,
         flick: {
             minDistance:10,
             minVelocity:0.3,
@@ -194,14 +196,21 @@
   function App(apiKey, authUrl, apiUrl) {
     this.foursquare = new Foursquare(apiKey, authUrl, apiUrl);
     this.run = function() {
-      this.foursquare.venue(bind(this.onVenue, this));
+      this.foursquare.venuesManaged(bind(this.onVenuesManaged, this));
       this.foursquare.listSpecials(bind(this.onListSpecials, this));
     };
+  }
+
+  App.prototype.onVenuesManaged = function(_venue) {
+    this.foursquare.venue(_venue.id, bind(this.onVenue, this));
   }
 
   App.prototype.onVenue = function(_venue) {
     var cat = _venue.categories[0].icon;
     $('#header a').html('<img src="'+cat+'"/>' + _venue.name);
+    var mayor = _venue.mayor.user;
+    $('#mayorCount').html(_venue.mayor.count + ' check-ins');
+    $('#mayor').html('<img src="'+ mayor.photo+'" height="32" width="32"/>' + mayor.firstName + ' ' + mayor.lastName);
     this.vid = _venue.id;
     this.foursquare.herenow(this.vid, bind(this.onHereNow, this));
   }
