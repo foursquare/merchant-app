@@ -69,7 +69,12 @@ h2 {
   padding-bottom: 0px;
   margin-bottom: 10px;
   line-height: 20px;
+}
+.box.enabled .content {
   background: #FFF6BA;
+}
+.box.disabled .content {
+  background: #DDD;
 }
 .box .specialTitle { 
   background: white;
