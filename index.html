@@ -159,11 +159,17 @@
 
   // YUI Scroll
   YUI().use('scrollview-base', function(Y) {
+    var height = 0;
+    if (window.navigator.standalone == true) {
+      height = 367;
+    } else {
+      height = 323;
+    }
 
     var scrollView = new Y.ScrollView({
         id:"scrollview",
         srcNode: '#scrollview-content',
-        height: 367,
+        height: height,
         flick: {
             minDistance:10,
             minVelocity:0.3,
