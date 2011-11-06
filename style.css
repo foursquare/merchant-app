@@ -168,6 +168,10 @@ textarea.inputBig {
 }
 #hereNow p strong {color: #999;}
 
+#currUser img {
+  margin: 5px;
+}
+
 .statsRow {overflow: hidden;}
 .statsTitle {
   color: #999;

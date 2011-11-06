@@ -134,9 +134,10 @@
 
     <div id="viewHere" class="view">
       <div id="currUser">
-        <img>
+        <img style="float:left">
+        <b><span id="name"></span></b><br/>
       </div>
-      <div id="hereNow">
+      <div id="hereNow" style="clear:both">
       </div>
     </div> <!-- end #viewUser -->
   
@@ -180,13 +181,11 @@
     scrollView.render();
   })
 
-  /*function showUser(user, photo) {
-    console.log(user);
-  }*/
-
-  function showUser(uid, photo) {
+  function showUser(vid, uid, photo, name) {
+    $('#currUser img').attr('src', photo);
+    $('#currUser #name').html(name);
     app.foursquare.stats(vid, function(stats) {
-      $('#currUser img').attr('src', photo);
+      console.log(stats)
     })
   }
 
@@ -233,16 +232,16 @@
   }
 
   App.prototype.onHereNow = function(_hereNow) {
-    //this.showUser();
     var hn = $('#hereNow');
     hn.append('<p><strong>' + _hereNow.count +  ' people</strong> are checked in here right now</p>');
     for (var u in _hereNow.items) {
       var user = _hereNow.items[u].user;
-      if(u == 0) {
-        $('#currUser img').attr('src', user.photo);
+      var fullName = user.firstName + ' ' + user.lastName[0] + '.';
+      if (u == 0) {
+        showUser(this.vid, user.id, user.photo, fullName);
       }
-      //var onClick = 'showUser(\'' + .photo + '\');'
-      var onClick = 'showUser(\'' + user.id + ',' + user.photo + '\');'
+      var args = [ this.vid, user.id, user.photo, fullName ];
+      var onClick = 'showUser(' + args.map(function(a) { return '\''+a+'\'' }).join(',') + ')';
 
       hn.append('<img onclick="' + onClick + '" src="' + _hereNow.items[u].user.photo + '" alt="' + _hereNow.items[u].user.firstName + '" width="32" height="32" />');
     }
